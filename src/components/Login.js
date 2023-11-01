@@ -4,15 +4,15 @@ import { validateFormData } from "../utils/validate";
 import {
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
-    updateProfile} from "firebase/auth";
+    updateProfile
+} from "firebase/auth";
 import { auth } from "../utils/firebase"
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
+import {BG_IMAGE, USER_AVATAR} from "../utils/constants"
 const Login = () => {
     const [isSignInForm, setIsSignInForm] = useState(true);
     const [errorMessage, setErrorMessage] = useState(null);
-    const navigate = useNavigate()
     const dispatch = useDispatch()
     const name = useRef(null)
     const email = useRef(null)
@@ -30,7 +30,7 @@ const Login = () => {
                     const user = userCredential.user;
                     updateProfile(user, {
                         displayName: name.current.value,
-                        photoURL: "https://i.pinimg.com/originals/e3/94/30/e39430434d2b8207188f880ac66c6411.png"
+                        photoURL: USER_AVATAR
                     }).then(() => {
                         const { uid, email, displayName, photoURL } = auth.currentUser;
                         dispatch(addUser({
@@ -40,11 +40,11 @@ const Login = () => {
                             photoURL: photoURL
                         }));
                         // Profile updated!
-                        navigate("/browse")
+
                     }).catch((error) => {
                         setErrorMessage(error.message)
                     });
-                   
+
                 })
                 .catch((error) => {
                     const errorCode = error.code;
@@ -58,8 +58,7 @@ const Login = () => {
             signInWithEmailAndPassword(auth, email.current.value, password.current.value)
                 .then((userCredential) => {
                     const user = userCredential.user;
-                    console.log(user)
-                    navigate("/browse")
+
                 })
                 .catch((error) => {
                     const errorCode = error.code;
@@ -77,7 +76,7 @@ const Login = () => {
             <Header />
             <div className="absolute">
                 <img
-                    src="https://assets.nflxext.com/ffe/siteui/vlv3/dace47b4-a5cb-4368-80fe-c26f3e77d540/f5b52435-458f-498f-9d1d-ccd4f1af9913/IN-en-20231023-popsignuptwoweeks-perspective_alpha_website_large.jpg"
+                    src={BG_IMAGE}
                     alt="bg-logo"
                 />
             </div>
