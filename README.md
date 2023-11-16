@@ -27,8 +27,14 @@
     -fetch data for trailer video
     -update the store with trailer videos
     -embedded youtube video and make it autoplay and mute
-    -tailwind classes to make main container to lokk better
+    -tailwind classes to make main container to look better
     -build secondary component
+    -bulid movie card
+    -build movie list
+    -TMDB image url
+    -made a browse page look amazing with tailwind css
+    -usePopularMovies custom hook
+    -GPT Search feature
 
     
 # Features
